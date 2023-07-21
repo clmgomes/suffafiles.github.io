@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gravar Linha de Texto em CSV</title>
+</head>
+<body>
+  <input type="text" id="linhaTexto" placeholder="Digite uma linha de texto">
+  <button id="saveButton">Gravar Linha de Texto</button>
+  <script>
+    document.getElementById('saveButton').addEventListener('click', () => {
+      const linhaTexto = document.getElementById('linhaTexto').value;
+
+      fetch('/saveData', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ linha: linhaTexto })
+      })
+        .then(response => {
+          console.log('Linha de texto gravada com sucesso!');
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro ao gravar a linha de texto:', error);
+        });
+    });
+  </script>
+</body>
+</html>
